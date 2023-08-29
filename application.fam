@@ -1,0 +1,8 @@
+App(
+    appid="gt",
+    name="GUI Test",
+    apptype=FlipperAppType.EXTERNAL,
+    entry_point="gt_app",
+    stack_size=1 * 1024,
+    requires=["gui"],
+)
