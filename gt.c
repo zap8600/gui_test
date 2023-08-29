@@ -118,6 +118,7 @@ int32_t gt_app() {
 
     TextBox* text_box = text_box_alloc();
     text_box_set_font(text_box, TextBoxFontText);
+    text_box_set_text(text_box, "beans");
 
     // set param 1 of custom event callback (impacts tick and navigation too).
     view_dispatcher_set_event_callback_context(view_dispatcher, my_context);
