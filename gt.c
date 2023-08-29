@@ -16,6 +16,7 @@ also the ViewDispatcher section of the User Interface wiki page
 #include <gui/gui.h>
 #include <gui/view_dispatcher.h>
 #include <gui/view.h>
+#include <gui/modules/text_box.h>
 
 typedef enum {
     MyEventTypeKey,
@@ -115,11 +116,8 @@ int32_t gt_app() {
     view_set_input_callback(view1, my_input_callback);
     view_set_orientation(view1, ViewOrientationHorizontal);
 
-    View* view2 = view_alloc();
-    view_set_context(view2, my_context);
-    view_set_draw_callback(view2, my_draw_callback);
-    view_set_input_callback(view2, my_input_callback);
-    view_set_orientation(view2, ViewOrientationVertical);
+    TextBox* text_box = text_box_alloc();
+    text_box_set_font(text_box, TextBoxFontText);
 
     // set param 1 of custom event callback (impacts tick and navigation too).
     view_dispatcher_set_event_callback_context(view_dispatcher, my_context);
@@ -129,7 +127,7 @@ int32_t gt_app() {
         view_dispatcher, my_view_dispatcher_custom_event_callback);
     view_dispatcher_enable_queue(view_dispatcher);
     view_dispatcher_add_view(view_dispatcher, MyViewId, view1);
-    view_dispatcher_add_view(view_dispatcher, MyOtherViewId, view2);
+    view_dispatcher_add_view(view_dispatcher, MyOtherViewId, text_box_get_view(text_box));
 
     Gui* gui = furi_record_open(RECORD_GUI);
     view_dispatcher_attach_to_gui(view_dispatcher, gui, ViewDispatcherTypeFullscreen);
